@@ -26,11 +26,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.biezhi</groupId>
-            <artifactId>wechat-api</artifactId>
-            <version>1.0.6</version>
-        </dependency>
-        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.7.0</version>
