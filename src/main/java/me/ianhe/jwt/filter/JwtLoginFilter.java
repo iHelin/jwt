@@ -35,22 +35,15 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            MyUser user = new ObjectMapper()
-                    .readValue(req.getInputStream(), MyUser.class);
-
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            user.getUsername(),
-                            user.getPassword(),
-                            new ArrayList<>())
-            );
+            MyUser user = new ObjectMapper().readValue(req.getInputStream(), MyUser.class);
+            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse response, FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
@@ -59,6 +52,6 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
                 .setIssuer("iHelin")
                 .signWith(SignatureAlgorithm.HS512, "MyJwtSecret")
                 .compact();
-        res.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("Authorization", "Bearer " + token);
     }
 }

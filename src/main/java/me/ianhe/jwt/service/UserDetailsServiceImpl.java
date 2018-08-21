@@ -17,12 +17,17 @@ import static java.util.Collections.emptyList;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 
+    /**
+     * 根据username 获取系统用户，
+     * 构造权限集合，封装成org.springframework.security.core.userdetails.UserDetails
+     *
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MyUser myUser = new MyUser("admin","password");
-//        if (myUser == null) {
-//            throw new UsernameNotFoundException(username);
-//        }
+        MyUser myUser = new MyUser("admin", "password");
         return new User(myUser.getUsername(), myUser.getPassword(), emptyList());
     }
 }
