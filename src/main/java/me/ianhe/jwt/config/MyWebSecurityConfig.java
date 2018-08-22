@@ -2,6 +2,7 @@ package me.ianhe.jwt.config;
 
 import me.ianhe.jwt.filter.JwtAuthenticationFilter;
 import me.ianhe.jwt.filter.JwtLoginFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -34,8 +35,13 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()));
     }
 
-    @Override
+    /*@Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
+    }*/
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
