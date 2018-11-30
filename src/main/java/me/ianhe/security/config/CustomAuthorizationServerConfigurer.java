@@ -53,9 +53,6 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager);
-        endpoints.tokenStore(jwtTokenStore)
-                .userDetailsService(userDetailsService);
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> enhancers = new ArrayList<>();
         enhancers.add((accessToken, authentication) -> {
@@ -66,13 +63,13 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
         });
         enhancers.add(jwtAccessTokenConverter);
         enhancerChain.setTokenEnhancers(enhancers);
-        endpoints.tokenEnhancer(enhancerChain).accessTokenConverter(jwtAccessTokenConverter);
+        endpoints.authenticationManager(authenticationManager)
+                .tokenStore(jwtTokenStore)
+                .userDetailsService(userDetailsService)
+                .tokenEnhancer(enhancerChain)
+                .accessTokenConverter(jwtAccessTokenConverter)
+        ;
     }
-
-    /*@Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("permitAll()");
-    }*/
 
     /**
      * 客户端配置
