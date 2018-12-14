@@ -16,7 +16,7 @@ public class SecurityApplication {
         SpringApplication.run(SecurityApplication.class, args);
     }
 
-    @GetMapping("/test")
+    @GetMapping({"/test", "/"})
     public String get() {
         return "hello";
     }
