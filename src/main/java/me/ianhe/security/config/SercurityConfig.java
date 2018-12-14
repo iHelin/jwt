@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SercurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
+    private GiteeOAuth2UserServiceImpl giteeOAuth2UserService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -21,7 +21,7 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .oauth2Login().userInfoEndpoint().userService(customOAuth2UserService);
+                .oauth2Login().userInfoEndpoint().userService(giteeOAuth2UserService);
     }
 
 }

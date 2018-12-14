@@ -19,13 +19,8 @@ public class SecurityApplication {
         SpringApplication.run(SecurityApplication.class, args);
     }
 
-    @GetMapping({"/test", "/"})
-    public String get() {
-        return "hello";
-    }
-
-    @GetMapping("/user")
-    public Object getUser() {
+    @GetMapping({"/", "/user"})
+    public Object get() {
         OAuth2AuthenticationToken authentication = (OAuth2AuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         OAuth2User principal = authentication.getPrincipal();
         return principal.getAttributes();
