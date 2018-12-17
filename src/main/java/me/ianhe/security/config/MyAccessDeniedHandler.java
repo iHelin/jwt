@@ -34,7 +34,7 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         PrintWriter out = httpServletResponse.getWriter();
         Map<String, String> res = new HashMap<>();
         res.put("status", "error");
-        res.put("msg", "权限不足，请联系管理员!");
+        res.put("msg", "权限不足，请联系管理员！");
         out.write(objectMapper.writeValueAsString(res));
         out.flush();
         out.close();
