@@ -67,8 +67,7 @@ public class CustomAuthorizationServerConfigurer extends AuthorizationServerConf
                 .tokenStore(jwtTokenStore)
                 .userDetailsService(userDetailsService)
                 .tokenEnhancer(enhancerChain)
-                .accessTokenConverter(jwtAccessTokenConverter)
-        ;
+                .accessTokenConverter(jwtAccessTokenConverter);
     }
 
     /**
