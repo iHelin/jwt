@@ -2,7 +2,6 @@ package me.ianhe.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +12,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  * @author iHelin
  * @since 2018/7/21 11:16
  */
-@EnableWebSecurity(debug = true)
+//@EnableWebSecurity(debug = true)
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // @formatter:off
